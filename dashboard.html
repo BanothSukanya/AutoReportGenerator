@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body{margin:0;font-family:Arial;display:flex;background:#dbeafe;}
+
+    .sidebar{
+      width:200px;
+      background:#2c2f4a;
+      color:white;
+      padding:20px;
+      height:100vh;
+      position:fixed;
+      top:0;
+      left:0;
+    }
+
+    .sidebar button{
+      width:100%;
+      padding:10px;
+      background:red;
+      color:white;
+      border:none;
+      border-radius:8px;
+    }
+    
+    .main{
+      flex:1;
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      margin-left:220px;
+    }
+
+
+   .card{
+  background:#f8fafc;   /* light color */
+  color:black;
+  padding:20px;
+  border-radius:15px;
+  margin-bottom:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  width:60%;
+}
+    
+
+    .card h3{
+  color:black;
+}
+
+    input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+  background:white;
+  color:black;
+}
+
+    .small{width:120px;}
+
+    button.generate{
+      background:#b12939;
+      color:white;
+      border:none;
+      padding:10px 20px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+   
+  </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h3>Dashboard</h3>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<div class="main">
+
+  <h1 style="text-align:center; color:#04258a; margin-bottom:20px;">
+    Report Maker
+  </h1>
+
+  <div class="card">
+    <h3>Project Details</h3>
+    <input placeholder="Project Title">
+    <input placeholder="Full Name">
+    <input placeholder="Roll No">
+    <input placeholder="Department">
+    <input placeholder="Section">
+    <input placeholder="Counselor">
+    <input placeholder="Supervisor">
+  </div>
+
+  <div class="card">
+    <h3>Report Inputs</h3>
+
+    <label>PPT Upload</label>
+    <input type="file">
+
+    <label>Images Upload</label>
+    <input type="file" multiple>
+
+    <label>Abstract Upload</label>
+    <input type="file">
+
+    <label>Reference Material</label>
+    <input type="file">
+
+    <label>Reference Report PDF</label>
+    <input type="file">
+
+    <label>Page Count</label>
+    <input class="small" type="number">
+
+    <br><br>
+    <button class="generate">Generate Report</button>
+  </div>
+
+</div>
+
+<script>
+function logout(){
+  window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>

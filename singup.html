@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup</title>
+  <style>
+    body{font-family:Arial;background:linear-gradient(120deg,#8f94fb,#4e54c8);display:flex;justify-content:center;align-items:center;height:100vh;}
+    .box{background:white;padding:25px;border-radius:15px;width:300px;box-shadow:0 10px 25px rgba(0,0,0,0.2);} 
+    input,button{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;}
+    button{background:#4e54c8;color:white;border:none;cursor:pointer;}
+  </style>
+</head>
+<body>
+<div class="box">
+  <h2>Create Account</h2>
+  <input type="text" placeholder="Full Name">
+  <input type="email" placeholder="Email">
+  <input type="password" id="pass" placeholder="Password">
+  <input type="password" id="confirm" placeholder="Confirm Password">
+  <button onclick="signup()">Sign Up</button>
+</div>
+<script>
+function signup(){
+  let p=document.getElementById("pass").value;
+  let c=document.getElementById("confirm").value;
+  if(p.length<8 || !p.includes("@")){alert("Password must be 8 chars & include @");return;}
+  if(p!==c){alert("Passwords not match");return;}
+  alert("Account Created");
+  window.location.href="login.html";
+  }
+</script>
+</body>
+</html>
