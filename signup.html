@@ -1,0 +1,55 @@
+<body>
+  <div class="box">
+    <h2>Create Account</h2>
+
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="email" id="email" placeholder="Email">
+
+    <div style="position:relative;">
+      <input type="password" id="pass" placeholder="Password">
+      <span onclick="togglePass('pass')" 
+            style="position:absolute; right:10px; top:12px; cursor:pointer;">👁</span>
+    </div>
+
+    <div style="position:relative;">
+      <input type="password" id="confirm" placeholder="Confirm Password">
+      <span onclick="togglePass('confirm')" 
+            style="position:absolute; right:10px; top:12px; cursor:pointer;">👁</span>
+    </div>
+
+    <button onclick="signup()">Sign Up</button>
+
+    <p>Already have account? 
+      <a href="login.html">Login</a>
+    </p>
+  </div>
+
+<script>
+function togglePass(id){
+  let input = document.getElementById(id);
+  input.type = (input.type === "password") ? "text" : "password";
+}
+
+function signup(){
+  let email = document.getElementById("email").value;
+  let pass = document.getElementById("pass").value;
+  let confirm = document.getElementById("confirm").value;
+
+  if(pass.length < 8){
+    alert("Password must be at least 8 characters");
+    return;
+  }
+
+  if(pass !== confirm){
+    alert("Passwords not match");
+    return;
+  }
+
+  localStorage.setItem("userEmail", email);
+  localStorage.setItem("userPass", pass);
+
+  alert("Account Created Successfully");
+  window.location.href="login.html";
+}
+</script>
+</body>

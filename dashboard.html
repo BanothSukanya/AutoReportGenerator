@@ -59,7 +59,26 @@
   background:white;
   color:black;
 }
+.section-box{
+  background:#e2e8f0;
+  padding:10px;
+  margin-top:10px;
+  border-radius:10px;
+}
 
+.section-box textarea{
+  width:100%;
+  margin-top:8px;
+}
+
+.delete-btn{
+  background:red;
+  color:white;
+  border:none;
+  padding:5px 10px;
+  margin-top:8px;
+  border-radius:5px;
+}
     .small{width:120px;}
 
     button.generate{
@@ -117,11 +136,19 @@
     <input type="file">
 
     <label>Page Count</label>
-    <input class="small" type="number">
+   <input class="small" type="number" min="0" placeholder="Enter page count">
 
     <br><br>
     <button class="generate">Generate Report</button>
   </div>
+  <div class="card">
+  <h3>Dynamic Report Sections</h3>
+<img src="C:\Users\banot\Downloads\report" alt="Project Image" width="200">
+  <input id="sectionTitle" placeholder="Enter Section Title">
+  <button onclick="addSection()">Add Section</button>
+
+  <div id="sectionsContainer"></div>
+</div>
 
 </div>
 
@@ -129,7 +156,46 @@
 function logout(){
   window.location.href="login.html";
 }
+function addSection(){
+  let title = document.getElementById("sectionTitle").value;
+
+  if(title === ""){
+    alert("Enter section title");
+    return;
+  }
+
+  let container = document.getElementById("sectionsContainer");
+
+  let div = document.createElement("div");
+  div.className = "section-box";
+
+  let heading = document.createElement("h4");
+  heading.textContent = title;
+
+  let textarea = document.createElement("textarea");
+  textarea.rows = 3;
+  textarea.placeholder = "Enter content...";
+
+  let deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.className = "delete-btn";
+
+  deleteBtn.onclick = function(){
+    div.remove();
+  };
+
+  div.appendChild(heading);
+  div.appendChild(textarea);
+  div.appendChild(deleteBtn);
+
+  container.appendChild(div);
+
+  document.getElementById("sectionTitle").value = "";
+}
+
 </script>
+
+
 
 </body>
 </html>
