@@ -1,89 +1,41 @@
+/* FORM VALIDATION */
+document.getElementById("contactForm").addEventListener("submit", function(e){
+  e.preventDefault();
 
-/* ---------------- QUIZ ---------------- */
-let questions = [
-  {
-    q: "What does HTML stand for?",
-    options: [
-      "HyperText Markup Language",
-      "HighText Machine Language",
-      "Hyper Tool Multi Language"
-    ],
-    answer: "HyperText Markup Language"
-  },
-  {
-    q: "What does CSS stand for?",
-    options: [
-      "Cascading Style Sheets",
-      "Color Style System",
-      "Computer Style Sheets"
-    ],
-    answer: "Cascading Style Sheets"
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+
+  if(name === "" || email === ""){
+    msg.innerText = "❌ Fill all fields";
+  } else if(!email.includes("@")){
+    msg.innerText = "❌ Invalid email";
+  } else {
+    msg.innerText = "✅ Message sent!";
   }
-];
+});
 
-let current = 0;
+/* TODO WITH LOCAL STORAGE */
+function addTask(){
+  let task = document.getElementById("taskInput").value;
 
-function loadQuestion(){
-  let q = questions[current];
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  tasks.push(task);
 
-  document.getElementById("question").innerText = q.q;
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  showTasks();
+}
 
-  let optionsDiv = document.getElementById("options");
-  optionsDiv.innerHTML = "";
+function showTasks(){
+  let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  let list = document.getElementById("list");
 
-  q.options.forEach(opt => {
-    let btn = document.createElement("button");
-    btn.innerText = opt;
+  list.innerHTML = "";
 
-    btn.onclick = function(){
-      if(opt === q.answer){
-        document.getElementById("result").innerText = "✅ Correct!";
-      } else {
-        document.getElementById("result").innerText = "❌ Wrong!";
-      }
-    };
-
-    optionsDiv.appendChild(btn);
+  tasks.forEach(t => {
+    let li = document.createElement("li");
+    li.innerText = t;
+    list.appendChild(li);
   });
 }
 
-function nextQuestion(){
-  current++;
-
-  if(current >= questions.length){
-    document.getElementById("question").innerText = "🎉 Quiz Finished!";
-    document.getElementById("options").innerHTML = "";
-    return;
-  }
-
-  document.getElementById("result").innerText = "";
-  loadQuestion();
-}
-
-loadQuestion();
-
-
-/* ---------------- API ---------------- */
-function getJoke(){
-  fetch("https://official-joke-api.appspot.com/random_joke")
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("joke").innerText =
-    data.setup + " - " + data.punchline;
-  });
-}
-
-
-/* ---------------- IMAGE CAROUSEL (FIXED) ---------------- */
-let images = [
-  "https://picsum.photos/300/200?random=1",
-  "https://picsum.photos/300/200?random=2",
-  "https://picsum.photos/300/200?random=3"
-];
-
-let i = 0;
-
-function nextImage(){
-  i = (i + 1) % images.length;
-  document.getElementById("slider").src = images[i];
-}
+showTasks();
